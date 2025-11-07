@@ -1,35 +1,77 @@
+
 # Multiclass Fish Image Classification
 
 ## Overview
-Classify fish images into multiple categories using deep learning (CNN and transfer learning). Includes model training, evaluation, and deployment via Streamlit.
+This project uses deep learning to classify fish species from images. It features custom CNN and multiple transfer learning models (VGG16, ResNet50, MobileNet, InceptionV3, EfficientNetB0), with a Streamlit web app for interactive predictions and model comparison.
+
+## Features
+- **Data Preprocessing & Augmentation**: Automated scripts for preparing and augmenting fish image datasets.
+- **Model Training**: Train both custom CNN and state-of-the-art transfer learning models.
+- **Model Evaluation**: Automated evaluation, metrics comparison, and confusion matrix visualization.
+- **Streamlit App**: User-friendly interface for model metrics, summaries, and image classification.
 
 ## Project Structure
-- `scripts/` : Python scripts for preprocessing, training, evaluation
-- `models/` : Saved trained models (.h5)
-- `notebooks/` : Jupyter notebooks for exploration
-- `docs/` : Documentation and reports
-- `requirements.txt` : Dependencies
+```
+├── scripts/                # Python scripts for training, evaluation, and app
+├── models/                 # Saved models and training histories
+├── Dataset/                # Organized fish image data (train/val/test)
+├── docs/                   # Documentation and class indices
+├── notebooks/              # Jupyter notebooks for exploration
+├── requirements.txt        # Python dependencies
+├── README.md               # Project documentation
+```
 
-## Steps
-1. Data Preprocessing & Augmentation
-2. Model Training (CNN & Transfer Learning)
-3. Model Evaluation
-4. Streamlit Deployment
+## Quick Start
 
-## Usage
-- Run preprocessing: `python scripts/data_preprocessing.py`
-- Train models: `python scripts/train_cnn.py` and `python scripts/train_transfer.py`
-- Evaluate: `python scripts/evaluate.py`
-- Launch app: `streamlit run scripts/app.py`
+1. **Install dependencies**
+	```sh
+	pip install -r requirements.txt
+	```
+
+2. **Preprocess data**
+	```sh
+	python scripts/data_preprocessing.py
+	```
+
+3. **Train models**
+	- Custom CNN:
+	  ```sh
+	  python scripts/train_cnn.py
+	  ```
+	- Transfer Learning:
+	  ```sh
+	  python scripts/train_transfer.py
+	  ```
+
+4. **Evaluate models**
+	```sh
+	python scripts/evaluate.py
+	```
+
+5. **Launch Streamlit app**
+	```sh
+	streamlit run scripts/app.py
+	```
+
+## Streamlit App
+- **Model Metrics**: Compare accuracy, precision, recall, and F1 across models.
+- **Model Summary**: Visual metric grid for all models.
+- **Classify Image**: Upload a fish image and get species prediction with confidence scores.
 
 ## Dataset
-- Fish images categorized by species (see data folder)
+- Images are organized by species in `Dataset/images/data/{train,val,test}/`.
+- See `docs/class_indices.csv` for class labels.
 
-## Deliverables
-- Trained models (.h5)
-- Streamlit app
-- Python scripts
-- Comparison report
+## Model Outputs
+- Trained models: `.keras` and `.h5` files in `models/`
+- Training histories: CSV files for each model
+- Confusion matrices: PNG images for each model
+- Model comparison: `model_comparison.csv`
 
-## Skills
-- Deep Learning, Python, TensorFlow/Keras, Streamlit, Data Preprocessing, Transfer Learning, Model Evaluation, Visualization, Model Deployment
+## Technologies Used
+- Python, TensorFlow, Keras, scikit-learn, Streamlit, Matplotlib, Pandas, NumPy, Pillow
+
+## References
+- [TensorFlow](https://www.tensorflow.org/)
+- [Streamlit](https://streamlit.io/)
+- [Keras Applications](https://keras.io/api/applications/)
