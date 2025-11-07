@@ -4,8 +4,8 @@ import pandas as pd
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 # Paths
-train_dir = 'C:\\WA\\POC\\Python\\MulticlassFishImageClassification\\Dataset\\images\\data\\train'
-validation_dir = 'C:\\WA\\POC\\Python\\MulticlassFishImageClassification\\Dataset\\images\\data\\val'
+train_dir = 'C:\\WA\\POC\Python\\MulticlassFishImageClassification\\Dataset\\images\\data\\train'
+validation_dir = 'C:\\WA\\POC\Python\\MulticlassFishImageClassification\\Dataset\\images\\data\\val'
 
 IMG_SIZE = (224, 224)
 BATCH_SIZE = 32
@@ -38,6 +38,6 @@ val_generator = train_datagen.flow_from_directory(
 )
 
 # Save class indices
-pd.DataFrame(list(train_generator.class_indices.items()), columns=['Class', 'Index']).to_csv('C:\\WA\\POC\\Python\\MulticlassFishImageClassification\\models\\class_indices.csv', index=False)
+pd.DataFrame(list(train_generator.class_indices.items()), columns=['Class', 'Index']).to_csv('C:\WA\POC\Python\\MulticlassFishImageClassification\\models\\class_indices.csv', index=False)
 
 print('Data generators created and class indices saved.')

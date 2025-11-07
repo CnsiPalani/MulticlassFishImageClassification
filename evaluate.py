@@ -6,10 +6,11 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
-DATA_DIR = '../data'
+DATA_DIR = 'C:\\WA\\POC\\Python\\MulticlassFishImageClassification\\Dataset\\images\\data\\val'
+
 IMG_SIZE = (224, 224)
 BATCH_SIZE = 32
-MODELS_DIR = '../models'
+MODELS_DIR = 'C:\\WA\\POC\\Python\\MulticlassFishImageClassification\\models'
 
 # Load validation data
 val_datagen = ImageDataGenerator(rescale=1./255, validation_split=0.2)
@@ -22,7 +23,7 @@ val_generator = val_datagen.flow_from_directory(
     shuffle=False
 )
 
-model_files = [f for f in os.listdir(MODELS_DIR) if f.endswith('.h5')]
+model_files = [f for f in os.listdir(MODELS_DIR) if f.endswith('.keras')]
 results = []
 
 for model_file in model_files:
@@ -44,10 +45,10 @@ for model_file in model_files:
     plt.xlabel('Predicted')
     plt.ylabel('True')
     plt.colorbar()
-    plt.savefig(f'../models/{model_file}_confusion_matrix.png')
+    plt.savefig(f'C:\\WA\\POC\\Python\\MulticlassFishImageClassification\\models\\{model_file}_confusion_matrix.png')
     plt.close()
 
 # Save results
 results_df = pd.DataFrame(results, columns=['Model', 'Accuracy', 'Precision', 'Recall', 'F1'])
-results_df.to_csv('../models/model_comparison.csv', index=False)
+results_df.to_csv('C:\\WA\\POC\\Python\\MulticlassFishImageClassification\\models\\model_comparison.csv', index=False)
 print('Evaluation complete. Results saved.')

@@ -2,13 +2,14 @@ import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.applications import VGG16, ResNet50, MobileNet, InceptionV3, EfficientNetB0
 from tensorflow.keras import layers, models
+import os
 
 DATA_DIR = 'C:\\WA\\POC\\Python\\MulticlassFishImageClassification\\Dataset\\images\\data\\train'
 validation_dir = 'C:\\WA\\POC\\Python\\MulticlassFishImageClassification\\Dataset\\images\\data\\val'
 
 IMG_SIZE = (224, 224)
 BATCH_SIZE = 32
-EPOCHS = 10
+EPOCHS = 2
 
 train_datagen = ImageDataGenerator(
     rescale=1./255,
@@ -58,5 +59,16 @@ for name, base in base_models.items():
     ])
     model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
     history = model.fit(train_generator, validation_data=val_generator, epochs=EPOCHS)
-    model.save(f'C:\\WA\\POC\\Python\\MulticlassFishImageClassification\\models\\{name}_fish_classifier.h5')
-    print(f'{name} model trained and saved.')
+    # Ensure the models directory exists
+    models_dir = 'C:\\WA\\POC\\Python\\MulticlassFishImageClassification\\models'
+    os.makedirs(models_dir, exist_ok=True)
+    # Save training history to CSV
+    import pandas as pd
+    history_df = pd.DataFrame(history.history)
+    history_df.to_csv(f'{models_dir}\{name}_fish_classifier_history.csv', index=False)
+    print(f'{name} training history saved.')
+    try:
+        model.save(f'{models_dir}\{name}_fish_classifier.keras')
+        print(f'{name} model trained and saved.')
+    except Exception as e:
+        print(f'Error saving {name} model:', e)

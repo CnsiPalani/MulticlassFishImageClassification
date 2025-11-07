@@ -5,6 +5,7 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 DATA_DIR = 'C:\\WA\\POC\\Python\\MulticlassFishImageClassification\\Dataset\\images\\data\\train'
 validation_dir = 'C:\\WA\\POC\\Python\\MulticlassFishImageClassification\\Dataset\\images\\data\\val'
 
+
 IMG_SIZE = (224, 224)
 BATCH_SIZE = 32
 EPOCHS = 20
@@ -54,3 +55,8 @@ history = model.fit(train_generator, validation_data=val_generator, epochs=EPOCH
 
 model.save('C:\\WA\\POC\\Python\\MulticlassFishImageClassification\\models\\cnn_fish_classifier.h5')
 print('CNN model trained and saved.')
+# Save training history to CSV
+import pandas as pd
+history_df = pd.DataFrame(history.history)
+history_df.to_csv('C:\\WA\\POC\\Python\\MulticlassFishImageClassification\\models\\cnn_fish_classifier_history.csv', index=False)
+print('Training history saved.')
